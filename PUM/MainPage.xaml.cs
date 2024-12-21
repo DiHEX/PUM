@@ -9,17 +9,19 @@
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void OnConvertClicked(object sender, EventArgs recivedEvent)
         {
-            count++;
+            if (string.IsNullOrWhiteSpace(CelsiusEntry.Text))
+            {
+                ResultLabel.Text = "Podaj poprawną wartość";
+                return;
+            }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            double.TryParse(CelsiusEntry.Text, out double celsius);
+            double fahrenheit = (celsius * 9 / 5) + 32;
+            ResultLabel.Text = $"Wynik: {fahrenheit} °F";
         }
+
     }
 
 }
