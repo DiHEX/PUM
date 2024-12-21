@@ -1,4 +1,7 @@
-﻿namespace PUM
+﻿using PUM.LAB1;
+using PUM.LAB3;
+
+namespace PUM
 {
     public partial class MainPage : ContentPage
     {
@@ -9,19 +12,14 @@
             InitializeComponent();
         }
 
-        private void OnConvertClicked(object sender, EventArgs recivedEvent)
+        private async void OnOpenTemperaturePageClicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(CelsiusEntry.Text))
-            {
-                ResultLabel.Text = "Podaj poprawną wartość";
-                return;
-            }
-
-            double.TryParse(CelsiusEntry.Text, out double celsius);
-            double fahrenheit = (celsius * 9 / 5) + 32;
-            ResultLabel.Text = $"Wynik: {fahrenheit} °F";
+            await Navigation.PushAsync(new Temperature());
         }
 
+        private async void OnOpenHangmanPageClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Hangman());
+        }
     }
-
 }

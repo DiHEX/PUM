@@ -12,28 +12,16 @@
                 HeightRequest="185"
                 Aspect="AspectFit"
                 SemanticProperties.Description="dot net bot in a race car number eight" />
-
-            <Label
-                Text="Konwerter Celcjuszy do Fahrenheita"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
-            <Entry
-                x:Name="CelsiusEntry"
-                Placeholder="Podaj wartość w Celcjuszach"
-                Keyboard="Numeric" />
-
+            
             <Button
-                x:Name="ConvertBtn"
-                Text="Konwertuj"
-                Clicked="OnConvertClicked"
+                Text="Celcjusze"
+                Clicked="OnOpenTemperaturePageClicked"
                 HorizontalOptions="Fill" />
 
-            <Label
-                x:Name="ResultLabel"
-                Text="Wynik wyświetli się tutaj"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2" />
+            <Button
+                Text="Wisielec"
+                Clicked="OnOpenHangmanPageClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

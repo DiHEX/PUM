@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PUM.LAB1.Temperature"
+             Title="Temperature">
+    <ScrollView>
+        <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25">
+
+            <Label
+            Text="Konwerter Celcjuszy do Fahrenheita"
+            Style="{StaticResource Headline}"
+            SemanticProperties.HeadingLevel="Level1" />
+
+            <Entry
+            x:Name="CelsiusEntry"
+            Placeholder="Podaj wartość w Celcjuszach"
+            Keyboard="Numeric" />
+
+            <Button
+            x:Name="ConvertBtn"
+            Text="Konwertuj"
+            Clicked="OnConvertClicked"
+            HorizontalOptions="Fill" />
+
+            <Label
+            x:Name="ResultLabel"
+            Text="Wynik wyświetli się tutaj"
+            Style="{StaticResource SubHeadline}"
+            SemanticProperties.HeadingLevel="Level2" />
+
+            <Button
+            Text="Wróć"
+            Clicked="ReturnClicked"
+            HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
