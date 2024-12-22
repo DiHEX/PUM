@@ -3,10 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PUM.LAB3.Hangman"
              Title="Hangman">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout Padding="20" Spacing="10">
+        <Label x:Name="WordLabel"
+           FontSize="24"
+           HorizontalOptions="Center" />
+        <Label x:Name="AttemptsLabel"
+           FontSize="18"
+           HorizontalOptions="Center" />
+        <Label x:Name="UsedLettersLabel"
+           FontSize="18"
+           HorizontalOptions="Center" />
+        <Entry x:Name="GuessEntry"
+           Placeholder="Wprowadź literę"
+           Keyboard="Text"
+           MaxLength="1" />
+        <Button Text="Zgadnij" Clicked="OnGuessButtonClicked" />
+    </StackLayout>
 </ContentPage>
