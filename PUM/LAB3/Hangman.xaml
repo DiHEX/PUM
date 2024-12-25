@@ -4,19 +4,22 @@
              x:Class="PUM.LAB3.Hangman"
              Title="Hangman">
     <StackLayout Padding="20" Spacing="10">
+        <Image x:Name="HangmanImage"
+               HeightRequest="200"
+               HorizontalOptions="Center" />
         <Label x:Name="WordLabel"
-           FontSize="24"
-           HorizontalOptions="Center" />
+               FontSize="24"
+               HorizontalOptions="Center" />
         <Label x:Name="AttemptsLabel"
-           FontSize="18"
-           HorizontalOptions="Center" />
+               FontSize="18"
+               HorizontalOptions="Center" />
         <Label x:Name="UsedLettersLabel"
-           FontSize="18"
-           HorizontalOptions="Center" />
+               FontSize="18"
+               HorizontalOptions="Center" />
         <Entry x:Name="GuessEntry"
-           Placeholder="Wprowadź literę"
-           Keyboard="Text"
-           MaxLength="1" />
+               Placeholder="Wprowadź literę"
+               Keyboard="Text"
+               MaxLength="1" />
         <Button Text="Zgadnij" Clicked="OnGuessButtonClicked" />
         <Button
             Text="Wróć"

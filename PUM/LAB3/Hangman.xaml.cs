@@ -46,21 +46,25 @@ namespace PUM.LAB3
                         guessedWord[i] = guessedLetter;
                     }
                 }
+                PlaySound("correct");
             }
             else
             {
                 remainingAttempts--;
+                PlaySound("incorrect");
             }
 
             UpdateUI();
 
             if (new string(guessedWord) == secretWord)
             {
+                PlaySound("win");
                 DisplayAlert("Wygrana!", "Gratulacje, odgad³eœ s³owo!", "OK");
                 ResetGame();
             }
             else if (remainingAttempts == 0)
             {
+                PlaySound("lose");
                 DisplayAlert("Przegrana", $"Przegra³eœ! Ukryte s³owo to: {secretWord}", "OK");
                 ResetGame();
             }
@@ -72,6 +76,31 @@ namespace PUM.LAB3
             AttemptsLabel.Text = $"Pozosta³e próby: {remainingAttempts}";
             UsedLettersLabel.Text = $"U¿yte litery: {guessedLetters}";
             GuessEntry.Text = string.Empty;
+            UpdateImage();
+        }
+
+        private void UpdateImage()
+        {
+            string imageName = $"hangman_{6 - remainingAttempts}"; // Obrazy: hangman_0.png, hangman_1.png, itd.
+            HangmanImage.Source = ImageSource.FromFile(imageName + ".png");
+        }
+
+        private void PlaySound(string state)
+        {
+            string soundFile = state switch
+            {
+                "correct" => "correct.mp3",
+                "incorrect" => "incorrect.mp3",
+                "win" => "win.mp3",
+                "lose" => "lose.mp3",
+                _ => null
+            };
+
+            if (!string.IsNullOrEmpty(soundFile))
+            {
+                var player = new Microsoft.Maui.Audio.AudioManager();
+                player.PlayAsync(AudioManager.CreateAudioPlayer(soundFile));
+            }
         }
 
         private void ResetGame()
