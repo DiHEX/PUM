@@ -81,5 +81,11 @@ namespace PUM.LAB3
             guessedLetters = "";
             UpdateUI();
         }
+
+        private void ReturnClicked(object sender, EventArgs e)
+        {
+            ResetGame();
+            Navigation.PopAsync();
+        }
     }
 }

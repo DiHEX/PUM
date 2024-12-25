@@ -18,5 +18,9 @@
            Keyboard="Text"
            MaxLength="1" />
         <Button Text="Zgadnij" Clicked="OnGuessButtonClicked" />
+        <Button
+            Text="Wróć"
+            Clicked="ReturnClicked"
+            HorizontalOptions="Fill" />
     </StackLayout>
 </ContentPage>
