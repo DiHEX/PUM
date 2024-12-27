@@ -288,7 +288,14 @@ public partial class ArkanoidGame : ContentPage
         _isGameRunning = false;
         _ballXSpeed = 5;
         _ballYSpeed = 5;
-        await DisplayAlert("Koniec gry", $"Wynik: {_score}", "OK");
+
+        string message = "Koniec gry";
+
+        if (_score == 300)
+        {
+            message = "Wygra³eœ!";
+        }
+        await DisplayAlert($"{message}", $"Wynik: {_score}", "OK");
         InitializeGame();
     }
 
