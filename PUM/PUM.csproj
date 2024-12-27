@@ -76,6 +76,9 @@
 	  <MauiXaml Update="LAB3\Hangman.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="LAB5\Puzzle15Game.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

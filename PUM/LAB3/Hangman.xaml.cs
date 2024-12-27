@@ -119,7 +119,6 @@ namespace PUM.LAB3
 
         private void ReturnClicked(object sender, EventArgs e)
         {
-            ResetGame();
             Navigation.PopAsync();
         }
     }

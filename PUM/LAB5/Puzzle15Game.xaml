@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PUM.LAB5.Puzzle15Game"
+             Title="Gra w pietnastke">
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="10" Grid.Row="0">
+            <Label x:Name="TimerLabel" FontSize="20" Text="Czas: 00:00" />
+            <Label x:Name="MoveCountLabel" FontSize="20" Text="Ruchy: 0" Margin="20,0,0,0" />
+        </StackLayout>
+        <Grid x:Name="PuzzleGrid" Grid.Row="1" ColumnSpacing="2" RowSpacing="2" />
+        <Button
+            Margin="10"
+            Grid.Row="2"
+            Text="Mieszaj"
+            Clicked="ShuffleClicked"
+            HorizontalOptions="Fill" />
+        <Button
+            Margin="10"
+            Grid.Row="3"
+            Text="Wróć"
+            Clicked="ReturnClicked"
+            HorizontalOptions="Fill" />
+    </Grid>
+</ContentPage>

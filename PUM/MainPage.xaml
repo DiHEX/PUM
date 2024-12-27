@@ -22,6 +22,11 @@
                 Text="Wisielec"
                 Clicked="OnOpenHangmanPageClicked"
                 HorizontalOptions="Fill" />
+
+            <Button
+                Text="Pietnastka"
+                Clicked="OnOpenPuzzle15GamePageClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 
