@@ -79,6 +79,9 @@
 	  <MauiXaml Update="LAB5\Puzzle15Game.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="LAB6\ArkanoidGame.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -27,6 +27,11 @@
                 Text="Pietnastka"
                 Clicked="OnOpenPuzzle15GamePageClicked"
                 HorizontalOptions="Fill" />
+
+            <Button
+                Text="Arkanoid"
+                Clicked="OnOpenArkanoidGamePageClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 
