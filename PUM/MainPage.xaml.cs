@@ -3,6 +3,7 @@ using PUM.LAB1;
 using PUM.LAB3;
 using PUM.LAB5;
 using PUM.LAB6;
+using PUM.LAB7;
 
 namespace PUM
 {
@@ -35,6 +36,11 @@ namespace PUM
         private async void OnOpenArkanoidGamePageClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ArkanoidGame());
+        }
+        
+        private async void OnOpenMemoryGamePageClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MemoryGame(audioManager));
         }
     }
 }

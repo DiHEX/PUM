@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PUM.LAB7.MemoryGame"
+             Title="Gra w Memory">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="10">
+            <Label Text="Czas: " FontSize="Large" />
+            <Label x:Name="TimerLabel" Text="0:00" FontSize="Large" />
+        </StackLayout>
+
+        <Grid Grid.Row="1"
+              x:Name="GameGrid"
+              Margin="10"
+              RowSpacing="5"
+              ColumnSpacing="5">
+            <!-- Dynamiczne wypełnienie -->
+        </Grid>
+    </Grid>
+</ContentPage>

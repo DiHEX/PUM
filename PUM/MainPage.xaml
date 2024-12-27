@@ -32,6 +32,11 @@
                 Text="Arkanoid"
                 Clicked="OnOpenArkanoidGamePageClicked"
                 HorizontalOptions="Fill" />
+            
+            <Button
+                Text="Gra w Memory"
+                Clicked="OnOpenMemoryGamePageClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 
