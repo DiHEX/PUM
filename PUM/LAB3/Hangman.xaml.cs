@@ -1,29 +1,34 @@
 using System;
 using Microsoft.Maui.Controls;
+using Plugin.Maui.Audio;
 
 namespace PUM.LAB3
 {
     public partial class Hangman : ContentPage
     {
         private string secretWord = "programowanie"; // Ukryte s³owo
+        private readonly IAudioManager audioManager;
         private char[] guessedWord;
         private int remainingAttempts = 6;
         private string guessedLetters = "";
 
-        public Hangman()
+        public Hangman(IAudioManager audioManager)
         {
             InitializeComponent();
+
+            this.audioManager = audioManager;
+
             guessedWord = new string('_', secretWord.Length).ToCharArray();
             UpdateUI();
         }
 
-        private void OnGuessButtonClicked(object sender, EventArgs e)
+        private async void OnGuessButtonClicked(object sender, EventArgs e)
         {
             string input = GuessEntry.Text?.ToLower();
 
             if (string.IsNullOrWhiteSpace(input) || input.Length != 1)
             {
-                DisplayAlert("B³¹d", "Proszê wprowadziæ jedn¹ literê.", "OK");
+                await DisplayAlert("B³¹d", "Proszê wprowadziæ jedn¹ literê.", "OK");
                 return;
             }
 
@@ -31,7 +36,7 @@ namespace PUM.LAB3
 
             if (guessedLetters.Contains(guessedLetter))
             {
-                DisplayAlert("B³¹d", "Ta litera zosta³a ju¿ u¿yta.", "OK");
+                await DisplayAlert("B³¹d", "Ta litera zosta³a ju¿ u¿yta.", "OK");
                 return;
             }
 
@@ -59,13 +64,13 @@ namespace PUM.LAB3
             if (new string(guessedWord) == secretWord)
             {
                 PlaySound("win");
-                DisplayAlert("Wygrana!", "Gratulacje, odgad³eœ s³owo!", "OK");
+                await DisplayAlert("Wygrana!", "Gratulacje, odgad³eœ s³owo!", "OK");
                 ResetGame();
             }
             else if (remainingAttempts == 0)
             {
                 PlaySound("lose");
-                DisplayAlert("Przegrana", $"Przegra³eœ! Ukryte s³owo to: {secretWord}", "OK");
+                await DisplayAlert("Przegrana", $"Przegra³eœ! Ukryte s³owo to: {secretWord}", "OK");
                 ResetGame();
             }
         }
@@ -85,7 +90,7 @@ namespace PUM.LAB3
             HangmanImage.Source = ImageSource.FromFile(imageName + ".png");
         }
 
-        private void PlaySound(string state)
+        private async void PlaySound(string state)
         {
             string soundFile = state switch
             {
@@ -98,8 +103,9 @@ namespace PUM.LAB3
 
             if (!string.IsNullOrEmpty(soundFile))
             {
-                var player = new Microsoft.Maui.Audio.AudioManager();
-                player.PlayAsync(AudioManager.CreateAudioPlayer(soundFile));
+                var player = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(soundFile));
+            
+                player.Play();
             }
         }
 

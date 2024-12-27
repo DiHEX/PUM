@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Plugin.Maui.Audio;
+using PUM.LAB3;
 
 namespace PUM
 {
@@ -18,6 +20,9 @@ namespace PUM
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.AddSingleton(AudioManager.Current);
+            builder.Services.AddTransient<MainPage>();
 
             return builder.Build();
         }
