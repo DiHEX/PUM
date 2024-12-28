@@ -5,8 +5,9 @@ namespace PUM.LAB7;
 
 public partial class MemoryGame : ContentPage
 {
-	private readonly IAudioManager audioManager;
+    private readonly IAudioManager audioManager;
     private const int DefaultGridSize = 4; // 4x4
+    private int gridSize;
     private int[,] cardValues;
     private Button[,] buttons;
     private Stopwatch stopwatch;
@@ -14,11 +15,28 @@ public partial class MemoryGame : ContentPage
     private int pairsFound = 0;
 
     public MemoryGame(IAudioManager audioManager)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
-		this.audioManager = audioManager;
-        InitializeGame(DefaultGridSize);
+        this.audioManager = audioManager;
+
+        PromptForGridSize();
+    }
+
+    private async void PromptForGridSize()
+    {
+        string result = await DisplayPromptAsync("Siatka do gry", "Podaj wielkoœæ siatki (2 dla 2x2, 4 dla 4x4, 6 dla 6x6, 8 dla 8x8):", initialValue: DefaultGridSize.ToString(), maxLength: 1, keyboard: Keyboard.Numeric);
+        if (int.TryParse(result, out int size) && size > 0 && size % 2 == 0 && size < 9)
+        {
+            gridSize = size;
+        }
+        else
+        {
+            gridSize = DefaultGridSize;
+        }
+
+
+        InitializeGame(gridSize);
         StartTimer();
     }
 
@@ -47,7 +65,7 @@ public partial class MemoryGame : ContentPage
                 {
                     BackgroundColor = Colors.Gray,
                     Text = "?",
-                    FontSize = 24,
+                    FontSize = FontSize(gridSize),
                     FontAttributes = FontAttributes.Bold
                 };
 
@@ -57,6 +75,22 @@ public partial class MemoryGame : ContentPage
                 buttons[row, col] = button;
                 GameGrid.Add(button, col, row);
             }
+        }
+    }
+
+    private int FontSize(int gridSize)
+    {
+        switch (gridSize)
+        {
+            case 2:
+            case 4:
+                return 24;
+            case 6:
+                return 16;
+            case 8:
+                return 12;
+            default:
+                return 24;
         }
     }
 
@@ -80,9 +114,13 @@ public partial class MemoryGame : ContentPage
 
     private async void OnCardClicked(int row, int col)
     {
-        if (buttons[row, col].Text != "?") return; // Ju¿ odkryta
+        if (buttons[row, col].Text != "?") return; // Already revealed
+
+        PlaySound("shuffle");
 
         buttons[row, col].Text = cardValues[row, col].ToString();
+
+        await Task.Delay(500);
 
         if (firstRow == -1 && firstCol == -1)
         {
@@ -91,7 +129,6 @@ public partial class MemoryGame : ContentPage
         }
         else
         {
-            await Task.Delay(500);
 
             if (cardValues[firstRow, firstCol] == cardValues[row, col])
             {
@@ -99,7 +136,11 @@ public partial class MemoryGame : ContentPage
                 buttons[row, col].IsEnabled = false;
                 pairsFound++;
                 if (pairsFound == cardValues.Length / 2)
-                    await DisplayAlert("Gratulacje!", "Wszystkie pary odkryte!", "OK");
+                {
+                    PlaySound("win");
+                    await DisplayAlert("Gratulacje!", "Wszyskie pary odkryte!", "OK");
+                    PromptForGridSize();
+                }
             }
             else
             {
@@ -120,5 +161,22 @@ public partial class MemoryGame : ContentPage
             TimerLabel.Text = stopwatch.Elapsed.ToString(@"m\:ss");
             return true; // Continue
         });
+    }
+
+    private async void PlaySound(string state)
+    {
+        string soundFile = state switch
+        {
+            "shuffle" => "shuffle.mp3",
+            "win" => "win.mp3",
+            _ => null
+        };
+
+        if (!string.IsNullOrEmpty(soundFile))
+        {
+            var player = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(soundFile));
+
+            player.Play();
+        }
     }
 }
